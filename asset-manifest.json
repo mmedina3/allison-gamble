@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/allison-gamble/static/css/main.30be061e.css",
-    "main.js": "/allison-gamble/static/js/main.4041fbaa.js",
+    "main.css": "/allison-gamble/static/css/main.f15028a7.css",
+    "main.js": "/allison-gamble/static/js/main.61407b90.js",
     "index.html": "/allison-gamble/index.html",
-    "main.30be061e.css.map": "/allison-gamble/static/css/main.30be061e.css.map",
-    "main.4041fbaa.js.map": "/allison-gamble/static/js/main.4041fbaa.js.map"
+    "main.f15028a7.css.map": "/allison-gamble/static/css/main.f15028a7.css.map",
+    "main.61407b90.js.map": "/allison-gamble/static/js/main.61407b90.js.map"
   },
   "entrypoints": [
-    "static/css/main.30be061e.css",
-    "static/js/main.4041fbaa.js"
+    "static/css/main.f15028a7.css",
+    "static/js/main.61407b90.js"
   ]
 }
