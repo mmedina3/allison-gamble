@@ -57,15 +57,19 @@ export default function AllisonGambleWebsite() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col" style={{
+    <div className="flex flex-col" style={{
       backgroundColor: '#F1EDDC',
       margin: '0 auto',
       position: 'relative',
       width: '100%',
-      minHeight: '-webkit-fill-available'
+      minHeight: '150vh' // Make page taller to enable scrolling
     }}>
       {/* Header */}
-      <div className="w-full flex items-center px-8 py-4 mobile-header" style={{ backgroundColor: '#DD8CF1' }}>
+      <div className="w-full flex items-center px-8 py-4 mobile-header" style={{
+        backgroundColor: '#DD8CF1',
+        position: 'relative',
+        zIndex: 10 // Lower z-index so slot machine can overlap
+      }}>
         <h1 style={{
           fontSize: '2.5rem',
           fontFamily: 'Arial Black, Arial, sans-serif',
@@ -111,25 +115,10 @@ export default function AllisonGambleWebsite() {
                   const totalLights = 20;
                   const progress = i / totalLights;
 
-                  // Responsive button dimensions - adjust based on screen size
-                  const isSmallScreen = window.innerWidth <= 480;
-                  const isMediumScreen = window.innerWidth <= 768;
-
-                  let buttonWidth, buttonHeight, cornerRadius;
-
-                  if (isSmallScreen) {
-                    buttonWidth = 4.5; // 5rem - 0.5rem border
-                    buttonHeight = 2; // 2.5rem - 0.5rem border
-                    cornerRadius = 0.75;
-                  } else if (isMediumScreen) {
-                    buttonWidth = 5.4; // 6rem - 0.6rem border
-                    buttonHeight = 2.4; // 3rem - 0.6rem border
-                    cornerRadius = 0.9;
-                  } else {
-                    buttonWidth = 6.7; // 7.7rem - 1rem border
-                    buttonHeight = 2.8; // 3.8rem - 1rem border
-                    cornerRadius = 1;
-                  }
+                  // Fixed button dimensions to match the actual button size
+                  const buttonWidth = 6.7; // 7.7rem - 1rem border
+                  const buttonHeight = 2.8; // 3.8rem - 1rem border  
+                  const cornerRadius = 1.2; // Adjusted for better curve matching
 
 
                   // Calculate perimeter segments
@@ -272,14 +261,20 @@ export default function AllisonGambleWebsite() {
       )}
 
       {/* Main Content - Slot machine overlapping header */}
-      <div className="flex-1 flex items-center justify-center" style={{ marginTop: '-3.75rem' }}>
+      <div className="flex-1 flex items-center justify-center" style={{
+        marginTop: '-8rem', // Much more overlap with header like original
+        minHeight: '100vh',
+        paddingBottom: '10vh',
+        position: 'relative',
+        zIndex: 20
+      }}>
         <div className="slot-machine-container" style={{
           width: 'clamp(35rem, 80vw, 70rem)',
           height: 'clamp(40rem, 85vh, 60rem)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          transform: 'scale(1.3)'
+          transform: 'scale(1.1)' // Reduce scale to match original proportions
         }}>
           {/* Slot Machine */}
           <div className="relative flex flex-col items-center" style={{ position: 'relative' }}>
@@ -290,8 +285,9 @@ export default function AllisonGambleWebsite() {
               backgroundColor: '#EF453F',
               borderRadius: '8.75rem 8.75rem 0 0',
               marginBottom: '-0.5rem',
-              zIndex: 10,
-              boxShadow: '0 0.25rem 0.5rem rgba(0, 0, 0, 0.15)'
+              zIndex: 25, // Higher z-index to ensure it overlaps header
+              boxShadow: '0 0.25rem 0.5rem rgba(0, 0, 0, 0.15)',
+              position: 'relative'
             }}></div>
 
             {/* Left outer red column - curved top, straight bottom */}
@@ -536,6 +532,16 @@ export default function AllisonGambleWebsite() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Eggshell Footer Section - shows when scrolling down */}
+      <div style={{
+        backgroundColor: '#F1EDDC',
+        minHeight: '50vh',
+        width: '100%',
+        position: 'relative',
+        zIndex: 5
+      }}>
       </div>
     </div>
   );

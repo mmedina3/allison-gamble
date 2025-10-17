@@ -15,19 +15,14 @@ body {
   font-family: Arial, sans-serif;
   overflow-x: hidden;
   background-color: #F1EDDC;
-  height: 100%;
   margin: 0;
   padding: 0;
-  /* Ensure full coverage on mobile */
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  /* Enable vertical scrolling */
+  overflow-y: auto;
 }
 
 #root {
   background-color: #F1EDDC;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  /* Ensure no gaps on mobile */
   width: 100%;
 }
 
@@ -231,6 +226,66 @@ button:focus {
   .mobile-jackpot .marquee-light {
     width: 0.25rem !important;
     height: 0.25rem !important;
+  }
+}
+
+/* Landscape orientation on mobile devices */
+@media (max-height: 600px) and (orientation: landscape) {
+  .slot-machine-container {
+    width: clamp(25rem, 70vw, 40rem) !important;
+    height: clamp(20rem, 80vh, 30rem) !important;
+    transform: scale(0.5) !important;
+  }
+  
+  .mobile-header {
+    padding: 0.25rem 1rem !important;
+  }
+  
+  .mobile-header h1 {
+    font-size: 1.2rem !important;
+    margin: 0.25rem 0 !important;
+  }
+  
+  .mobile-jackpot {
+    width: 4rem !important;
+    height: 2rem !important;
+    border-width: 0.2rem !important;
+  }
+  
+  .mobile-jackpot span {
+    font-size: 0.8rem !important;
+  }
+  
+  .mobile-jackpot .marquee-light {
+    width: 0.2rem !important;
+    height: 0.2rem !important;
+  }
+}
+
+/* Very small landscape screens (like iPhone SE landscape) */
+@media (max-height: 450px) and (orientation: landscape) {
+  .slot-machine-container {
+    width: clamp(20rem, 60vw, 30rem) !important;
+    height: clamp(15rem, 70vh, 25rem) !important;
+    transform: scale(0.4) !important;
+  }
+  
+  .mobile-header {
+    padding: 0.2rem 0.5rem !important;
+  }
+  
+  .mobile-header h1 {
+    font-size: 1rem !important;
+    margin: 0.1rem 0 !important;
+  }
+  
+  .mobile-jackpot {
+    width: 3.5rem !important;
+    height: 1.8rem !important;
+  }
+  
+  .mobile-jackpot span {
+    font-size: 0.7rem !important;
   }
 }/* Mar
 quee lights animation for jackpot button */
