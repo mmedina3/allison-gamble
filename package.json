@@ -1,5 +1,12 @@
 {
   "name": "allison_gamble",
+  "homepage": "https://mmedina3.github.io/allison-gamble",
+  "version": "0.1.0",
+  ...
+}
+
+{
+  "name": "allison_gamble",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
