@@ -1,0 +1,15 @@
+/* Reset margin and padding for consistent layout */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #fffbea; /* Matches your slot machine background */
+  font-family: 'Arial Black', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Set box-sizing to border-box globally */
+*, *::before, *::after {
+  box-sizing: border-box;
+}

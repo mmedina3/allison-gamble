@@ -1,0 +1,186 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #F1EDDC;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  background-color: #F1EDDC;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.relative {
+  position: relative;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.hover\:opacity-90:hover {
+  opacity: 0.9;
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+
+
+/* Jackpot celebration animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes jackpotPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 20px #FFE066, 0 0 40px #FFE066, 0 0 60px #FFE066;
+  }
+
+  50% {
+    transform: scale(1.1);
+    text-shadow: 0 0 30px #FFE066, 0 0 60px #FFE066, 0 0 90px #FFE066;
+  }
+}
+
+@keyframes jackpotGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px #FFE066, inset 0 0 20px rgba(255, 224, 102, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px #FFE066, inset 0 0 30px rgba(255, 224, 102, 0.5);
+  }
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+
+
+/* Responsive slot machine container - automatically resizes based on browser window */
+.slot-machine-container {
+  max-width: 95vw;
+  max-height: 95vh;
+  transition: all 0.3s ease;
+}
+
+/* Smooth responsive scaling for all screen sizes */
+@media (max-width: 1200px) {
+  .slot-machine-container {
+    transform: scale(1.1) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .slot-machine-container {
+    width: clamp(30rem, 85vw, 50rem) !important;
+    height: clamp(35rem, 75vh, 45rem) !important;
+    transform: scale(0.9) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .slot-machine-container {
+    width: clamp(25rem, 90vw, 35rem) !important;
+    height: clamp(30rem, 80vh, 40rem) !important;
+    transform: scale(0.8) !important;
+  }
+}/* Mar
+quee lights animation for jackpot button */
+@keyframes marqueePulse {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(0.8);
+    box-shadow: 0 0 0.25rem #FFE066, inset 0 0 0.125rem rgba(255, 255, 255, 0.5);
+  }
+  50% { 
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+    box-shadow: 0 0 1rem #FFE066, inset 0 0 0.5rem rgba(255, 255, 255, 0.9);
+  }
+}
