@@ -64,7 +64,7 @@ export default function AllisonGambleWebsite() {
       n: 'relative'
     }}>
       {/* Header */}
-      <div className="w-full flex items-center px-8 py-4" style={{ backgroundColor: '#DD8CF1' }}>
+      <div className="w-full flex items-center px-8 py-4 mobile-header" style={{ backgroundColor: '#DD8CF1' }}>
         <h1 style={{
           fontSize: '2.5rem',
           fontFamily: 'Arial Black, Arial, sans-serif',
@@ -81,7 +81,7 @@ export default function AllisonGambleWebsite() {
         </h1>
 
         {/* Simple Jackpot Button matching original design */}
-        <div style={{
+        <div className="mobile-jackpot" style={{
           marginRight: '1rem',
           backgroundColor: 'transparent',
           border: '0.5rem solid #F69C40',

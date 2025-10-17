@@ -6,12 +6,21 @@
 
 html {
   background-color: #F1EDDC;
+  height: 100%;
 }
 
 body {
   font-family: Arial, sans-serif;
   overflow-x: hidden;
   background-color: #F1EDDC;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  background-color: #F1EDDC;
+  min-height: 100vh;
 }
 
 .min-h-screen {
@@ -152,23 +161,54 @@ button:focus {
 /* Smooth responsive scaling for all screen sizes */
 @media (max-width: 1200px) {
   .slot-machine-container {
-    transform: scale(1.1) !important;
+    transform: scale(1.0) !important;
   }
 }
 
 @media (max-width: 768px) {
   .slot-machine-container {
-    width: clamp(30rem, 85vw, 50rem) !important;
-    height: clamp(35rem, 75vh, 45rem) !important;
-    transform: scale(0.9) !important;
+    width: clamp(25rem, 90vw, 45rem) !important;
+    height: clamp(30rem, 70vh, 40rem) !important;
+    transform: scale(0.7) !important;
+  }
+  
+  /* Make header more mobile friendly */
+  .mobile-header {
+    padding: 0.5rem 1rem !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  .mobile-header h1 {
+    font-size: 1.8rem !important;
+    margin: 0.5rem 0 !important;
+  }
+  
+  .mobile-jackpot {
+    width: 6rem !important;
+    height: 3rem !important;
+    margin-right: 0 !important;
   }
 }
 
 @media (max-width: 480px) {
   .slot-machine-container {
-    width: clamp(25rem, 90vw, 35rem) !important;
-    height: clamp(30rem, 80vh, 40rem) !important;
-    transform: scale(0.8) !important;
+    width: clamp(20rem, 95vw, 30rem) !important;
+    height: clamp(25rem, 65vh, 35rem) !important;
+    transform: scale(0.6) !important;
+  }
+  
+  .mobile-header h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  .mobile-jackpot {
+    width: 5rem !important;
+    height: 2.5rem !important;
+  }
+  
+  .mobile-jackpot span {
+    font-size: 1rem !important;
   }
 }/* Mar
 quee lights animation for jackpot button */
