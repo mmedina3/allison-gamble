@@ -59,9 +59,10 @@ export default function AllisonGambleWebsite() {
   return (
     <div className="min-h-screen flex flex-col" style={{
       backgroundColor: '#F1EDDC',
-      // maxWidth: '1200px',
       margin: '0 auto',
-      n: 'relative'
+      position: 'relative',
+      width: '100%',
+      minHeight: '-webkit-fill-available'
     }}>
       {/* Header */}
       <div className="w-full flex items-center px-8 py-4 mobile-header" style={{ backgroundColor: '#DD8CF1' }}>
@@ -97,6 +98,7 @@ export default function AllisonGambleWebsite() {
           {[...Array(20)].map((_, i) => (
             <div
               key={i}
+              className="marquee-light"
               style={{
                 position: 'absolute',
                 width: '0.5rem',
@@ -109,10 +111,25 @@ export default function AllisonGambleWebsite() {
                   const totalLights = 20;
                   const progress = i / totalLights;
 
-                  // Match the actual button dimensions
-                  const buttonWidth = 7; // Actual inner button width
-                  const buttonHeight = 3; // Actual inner button height  
-                  const cornerRadius = 1; // Actual inner border radius
+                  // Responsive button dimensions - adjust based on screen size
+                  const isSmallScreen = window.innerWidth <= 480;
+                  const isMediumScreen = window.innerWidth <= 768;
+
+                  let buttonWidth, buttonHeight, cornerRadius;
+
+                  if (isSmallScreen) {
+                    buttonWidth = 4.5; // 5rem - 0.5rem border
+                    buttonHeight = 2; // 2.5rem - 0.5rem border
+                    cornerRadius = 0.75;
+                  } else if (isMediumScreen) {
+                    buttonWidth = 5.4; // 6rem - 0.6rem border
+                    buttonHeight = 2.4; // 3rem - 0.6rem border
+                    cornerRadius = 0.9;
+                  } else {
+                    buttonWidth = 6.7; // 7.7rem - 1rem border
+                    buttonHeight = 2.8; // 3.8rem - 1rem border
+                    cornerRadius = 1;
+                  }
 
 
                   // Calculate perimeter segments

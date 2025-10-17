@@ -7,6 +7,8 @@
 html {
   background-color: #F1EDDC;
   height: 100%;
+  /* Fix mobile browser black bars */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 body {
@@ -16,11 +18,17 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  /* Ensure full coverage on mobile */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 #root {
   background-color: #F1EDDC;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
+  /* Ensure no gaps on mobile */
+  width: 100%;
 }
 
 .min-h-screen {
@@ -188,6 +196,13 @@ button:focus {
     width: 6rem !important;
     height: 3rem !important;
     margin-right: 0 !important;
+    border-width: 0.3rem !important;
+  }
+  
+  /* Fix marquee lights for mobile jackpot button */
+  .mobile-jackpot .marquee-light {
+    width: 0.3rem !important;
+    height: 0.3rem !important;
   }
 }
 
@@ -205,10 +220,17 @@ button:focus {
   .mobile-jackpot {
     width: 5rem !important;
     height: 2.5rem !important;
+    border-width: 0.25rem !important;
   }
   
   .mobile-jackpot span {
     font-size: 1rem !important;
+  }
+  
+  /* Smaller marquee lights for small phones */
+  .mobile-jackpot .marquee-light {
+    width: 0.25rem !important;
+    height: 0.25rem !important;
   }
 }/* Mar
 quee lights animation for jackpot button */
