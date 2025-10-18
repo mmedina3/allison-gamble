@@ -21,6 +21,8 @@ body {
   overflow-y: auto;
 }
 
+/* Removed CSS pseudo-element approach, using JS instead */
+
 #root {
   background-color: #F1EDDC;
   width: 100%;
