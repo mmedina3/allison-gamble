@@ -283,28 +283,33 @@ export default function AllisonGambleWebsite() {
             <div style={{
               textAlign: 'center',
               color: '#FFE066',
-              fontSize: '5rem',
+              fontSize: windowSize.width <= 768 ? '3rem' : '5rem',
               fontWeight: 'bold',
               fontFamily: 'Arial, sans-serif',
-              textShadow: '0 0 1.25rem #FFE066, 0 0 2.5rem #FFE066, 0 0 3.75rem #FFE066',
-              animation: 'jackpotPulse 1s ease-in-out infinite'
+              textShadow: windowSize.width <= 768
+                ? '0 0 0.8rem #FFE066, 0 0 1.6rem #FFE066, 0 0 2.4rem #FFE066'
+                : '0 0 1.25rem #FFE066, 0 0 2.5rem #FFE066, 0 0 3.75rem #FFE066',
+              animation: windowSize.width <= 768
+                ? 'jackpotPulseMobile 1s ease-in-out infinite'
+                : 'jackpotPulse 1s ease-in-out infinite'
             }}>
               🎉 JACKPOT! 🎉
             </div>
 
-            {/* Confetti effect */}
-            {[...Array(50)].map((_, i) => (
+            {/* Confetti effect - reduced count on mobile for better performance */}
+            {[...Array(windowSize.width <= 768 ? 25 : 50)].map((_, i) => (
               <div
                 key={i}
                 style={{
                   position: 'absolute',
-                  width: '0.625rem',
-                  height: '0.625rem',
+                  width: windowSize.width <= 768 ? '0.4rem' : '0.625rem',
+                  height: windowSize.width <= 768 ? '0.4rem' : '0.625rem',
                   backgroundColor: ['#FFE066', '#F69C40', '#EF453F', '#DD8CF1'][i % 4],
                   borderRadius: '50%',
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
-                  animation: `confetti 3s ease-out infinite ${Math.random() * 2}s`
+                  animation: `confetti 3s ease-out infinite ${Math.random() * 2}s`,
+                  willChange: 'transform'
                 }}
               />
             ))}
@@ -313,20 +318,52 @@ export default function AllisonGambleWebsite() {
 
         {/* Main Content - Slot machine overlapping header */}
         <div className="flex-1 flex items-center justify-center" style={{
-          marginTop: '-4.5rem', // Slightly lower position
-          minHeight: '100vh',
-          paddingBottom: '10vh',
+          marginTop: (() => {
+            const isLandscape = windowSize.width > windowSize.height;
+            if (isLandscape && windowSize.height <= 450) return '-1.5rem';
+            if (isLandscape && windowSize.height <= 600) return '-2rem';
+            return '-4.5rem';
+          })(),
+          minHeight: (() => {
+            const isLandscape = windowSize.width > windowSize.height;
+            if (isLandscape && windowSize.height <= 450) return '80vh';
+            if (isLandscape && windowSize.height <= 600) return '85vh';
+            return '100vh';
+          })(),
+          paddingBottom: (() => {
+            const isLandscape = windowSize.width > windowSize.height;
+            if (isLandscape && windowSize.height <= 450) return '1vh';
+            if (isLandscape && windowSize.height <= 600) return '2vh';
+            return '10vh';
+          })(),
           position: 'relative',
           zIndex: 20,
           backgroundColor: 'transparent' // Let main container background show through
         }}>
           <div className="slot-machine-container" style={{
-            width: 'clamp(35rem, 80vw, 70rem)',
-            height: 'clamp(40rem, 85vh, 60rem)',
+            width: (() => {
+              const isLandscape = windowSize.width > windowSize.height;
+              if (isLandscape) return 'clamp(30rem, 85vw, 50rem)';
+              return 'clamp(35rem, 80vw, 70rem)';
+            })(),
+            height: (() => {
+              const isLandscape = windowSize.width > windowSize.height;
+              if (isLandscape && windowSize.height <= 450) return 'clamp(20rem, 85vh, 30rem)';
+              if (isLandscape && windowSize.height <= 600) return 'clamp(25rem, 90vh, 35rem)';
+              return 'clamp(40rem, 85vh, 60rem)';
+            })(),
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            transform: 'scale(1.21)' // 10% bigger (1.1 × 1.1)
+            transform: (() => {
+              const isLandscape = windowSize.width > windowSize.height;
+              if (isLandscape && windowSize.height <= 450) return 'scale(0.5)';
+              if (isLandscape && windowSize.height <= 600) return 'scale(0.65)';
+              if (windowSize.width <= 480) return 'scale(0.6)';
+              if (windowSize.width <= 768) return 'scale(0.7)';
+              if (windowSize.width <= 1200) return 'scale(1.0)';
+              return 'scale(1.21)';
+            })()
           }}>
             {/* Slot Machine */}
             <div className="relative flex flex-col items-center" style={{ position: 'relative' }}>
@@ -439,10 +476,19 @@ export default function AllisonGambleWebsite() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         fontSize: '1.875rem',
-                        boxShadow: isJackpot ? '0 0 1.25rem #FFE066, inset 0 0 1.25rem rgba(255, 224, 102, 0.3)' : 'none',
-                        animation: isJackpot ? 'jackpotGlow 1s ease-in-out infinite' : 'none',
+                        boxShadow: isJackpot
+                          ? (windowSize.width <= 768
+                            ? '0 0 0.8rem #FFE066, inset 0 0 0.8rem rgba(255, 224, 102, 0.4)'
+                            : '0 0 1.25rem #FFE066, inset 0 0 1.25rem rgba(255, 224, 102, 0.3)')
+                          : 'none',
+                        animation: isJackpot
+                          ? (windowSize.width <= 768
+                            ? 'jackpotGlowMobile 1s ease-in-out infinite'
+                            : 'jackpotGlow 1s ease-in-out infinite')
+                          : 'none',
                         transform: isJackpot ? 'scale(1.05)' : 'scale(1)',
-                        transition: 'all 0.3s ease'
+                        transition: 'all 0.3s ease',
+                        willChange: isJackpot ? 'transform, box-shadow, filter' : 'auto'
                       }}>
                         {symbol}
                       </div>

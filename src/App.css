@@ -117,28 +117,26 @@ button:focus {
 }
 
 @keyframes jackpotPulse {
-
-  0%,
-  100% {
+  0%, 100% {
     transform: scale(1);
-    text-shadow: 0 0 20px #FFE066, 0 0 40px #FFE066, 0 0 60px #FFE066;
+    text-shadow: 0 0 1.25rem #FFE066, 0 0 2.5rem #FFE066, 0 0 3.75rem #FFE066;
+    filter: brightness(1) saturate(1);
   }
-
   50% {
     transform: scale(1.1);
-    text-shadow: 0 0 30px #FFE066, 0 0 60px #FFE066, 0 0 90px #FFE066;
+    text-shadow: 0 0 1.875rem #FFE066, 0 0 3.75rem #FFE066, 0 0 5.625rem #FFE066;
+    filter: brightness(1.3) saturate(1.4);
   }
 }
 
 @keyframes jackpotGlow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 20px #FFE066, inset 0 0 20px rgba(255, 224, 102, 0.3);
+  0%, 100% {
+    box-shadow: 0 0 1.25rem #FFE066, inset 0 0 1.25rem rgba(255, 224, 102, 0.3);
+    filter: brightness(1) saturate(1);
   }
-
   50% {
-    box-shadow: 0 0 40px #FFE066, inset 0 0 30px rgba(255, 224, 102, 0.5);
+    box-shadow: 0 0 2.5rem #FFE066, inset 0 0 1.875rem rgba(255, 224, 102, 0.5);
+    filter: brightness(1.2) saturate(1.3);
   }
 }
 
@@ -147,11 +145,21 @@ button:focus {
     transform: translateY(-100vh) rotate(0deg);
     opacity: 1;
   }
-
   100% {
     transform: translateY(100vh) rotate(720deg);
     opacity: 0;
   }
+}
+
+/* Hardware acceleration for better mobile performance */
+.marquee-light,
+[style*="animation"] {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
 }
 
 
@@ -243,33 +251,36 @@ button:focus {
 /* Landscape orientation on mobile devices */
 @media (max-height: 600px) and (orientation: landscape) {
   .slot-machine-container {
-    width: clamp(25rem, 70vw, 40rem) !important;
-    height: clamp(20rem, 80vh, 30rem) !important;
-    transform: scale(0.5) !important;
+    width: clamp(30rem, 85vw, 50rem) !important;
+    height: clamp(25rem, 90vh, 35rem) !important;
+    transform: scale(0.65) !important;
   }
   
+
+  
   .mobile-header {
-    padding: 0.25rem 1rem !important;
+    padding: 0.3rem 1rem !important;
     flex-direction: row !important;
     justify-content: space-between !important;
     align-items: center !important;
+    min-height: 3rem !important;
   }
   
   .mobile-header h1 {
-    font-size: 1.2rem !important;
+    font-size: 1.4rem !important;
     margin: 0.25rem 0 !important;
     flex: 1 !important;
   }
   
   .mobile-jackpot {
-    width: 4rem !important;
-    height: 2rem !important;
+    width: 4.5rem !important;
+    height: 2.2rem !important;
     border-width: 0.2rem !important;
-    border-radius: 0.8rem !important;
+    border-radius: 0.9rem !important;
   }
   
   .mobile-jackpot span {
-    font-size: 0.8rem !important;
+    font-size: 0.9rem !important;
   }
   
   .mobile-jackpot .marquee-light {
@@ -281,32 +292,35 @@ button:focus {
 /* Very small landscape screens (like iPhone SE landscape) */
 @media (max-height: 450px) and (orientation: landscape) {
   .slot-machine-container {
-    width: clamp(20rem, 60vw, 30rem) !important;
-    height: clamp(15rem, 70vh, 25rem) !important;
-    transform: scale(0.4) !important;
+    width: clamp(25rem, 75vw, 40rem) !important;
+    height: clamp(20rem, 85vh, 30rem) !important;
+    transform: scale(0.5) !important;
   }
   
+
+  
   .mobile-header {
-    padding: 0.2rem 0.5rem !important;
+    padding: 0.2rem 0.8rem !important;
     flex-direction: row !important;
     justify-content: space-between !important;
     align-items: center !important;
+    min-height: 2.5rem !important;
   }
   
   .mobile-header h1 {
-    font-size: 1rem !important;
+    font-size: 1.1rem !important;
     margin: 0.1rem 0 !important;
     flex: 1 !important;
   }
   
   .mobile-jackpot {
-    width: 3.5rem !important;
-    height: 1.8rem !important;
-    border-radius: 0.6rem !important;
+    width: 3.8rem !important;
+    height: 1.9rem !important;
+    border-radius: 0.7rem !important;
   }
   
   .mobile-jackpot span {
-    font-size: 0.7rem !important;
+    font-size: 0.75rem !important;
   }
   
   .mobile-jackpot .marquee-light {
@@ -355,5 +369,37 @@ button:focus {
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 0;
+  }
+  
+  /* Improve mobile rendering performance and reduce pixelation */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Mobile-specific jackpot celebration improvements */
+  @keyframes jackpotPulseMobile {
+    0%, 100% {
+      transform: scale(1);
+      text-shadow: 0 0 0.8rem #FFE066, 0 0 1.6rem #FFE066, 0 0 2.4rem #FFE066;
+      filter: brightness(1) saturate(1.2);
+    }
+    50% {
+      transform: scale(1.05);
+      text-shadow: 0 0 1.2rem #FFE066, 0 0 2.4rem #FFE066, 0 0 3.6rem #FFE066;
+      filter: brightness(1.2) saturate(1.4);
+    }
+  }
+  
+  @keyframes jackpotGlowMobile {
+    0%, 100% {
+      box-shadow: 0 0 0.8rem #FFE066, inset 0 0 0.8rem rgba(255, 224, 102, 0.4);
+      filter: brightness(1.1) saturate(1.2);
+    }
+    50% {
+      box-shadow: 0 0 1.6rem #FFE066, inset 0 0 1.2rem rgba(255, 224, 102, 0.6);
+      filter: brightness(1.3) saturate(1.4);
+    }
   }
 }
