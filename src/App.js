@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 export default function AllisonGambleWebsite() {
@@ -6,8 +6,24 @@ export default function AllisonGambleWebsite() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [isJackpot, setIsJackpot] = useState(false);
   const [showCelebration, setShowCelebration] = useState(false);
+  const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
 
   const symbols = ['🍒', '🍋', '🍊', '🍇', '🔔', '⭐', '💎'];
+
+  // Handle window resize to recalculate marquee light positions
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
+  }, []);
 
   const spin = () => {
     if (isSpinning) return;
@@ -114,7 +130,7 @@ export default function AllisonGambleWebsite() {
             {/* Marquee lights following the exact rounded rectangle outline */}
             {[...Array(20)].map((_, i) => (
               <div
-                key={i}
+                key={`${i}-${windowSize.width}-${windowSize.height}`}
                 className="marquee-light"
                 style={{
                   position: 'absolute',
@@ -128,16 +144,38 @@ export default function AllisonGambleWebsite() {
                     const totalLights = 20;
                     const progress = i / totalLights;
 
-                    // Precise button dimensions to match the actual jackpot button outline
-                    const buttonWidth = 6.7; // 7.7rem - 1rem border (0.5rem on each side)
-                    const buttonHeight = 2.8; // 3.8rem - 1rem border (0.5rem on each side)
-                    const cornerRadius = 1.0; // Match the actual border radius of 1.5rem scaled down
+                    // Responsive button dimensions that match CSS media queries
+                    // These should match the ACTUAL button outer dimensions including border
+                    const getButtonDimensions = () => {
+                      const screenWidth = windowSize.width;
+                      const screenHeight = windowSize.height;
+                      const isLandscape = screenWidth > screenHeight;
 
+                      // Match the CSS media query breakpoints exactly - use FULL button dimensions
+                      if (isLandscape && screenHeight <= 450) {
+                        // Very small landscape - 3.5rem x 1.8rem
+                        return { width: 3.5, height: 1.8, borderRadius: 0.6 };
+                      } else if (isLandscape && screenHeight <= 600) {
+                        // Landscape orientation - 4rem x 2rem
+                        return { width: 4.0, height: 2.0, borderRadius: 0.8 };
+                      } else if (screenWidth <= 480) {
+                        // Small phones - 5rem x 2.5rem
+                        return { width: 5.0, height: 2.5, borderRadius: 1.0 };
+                      } else if (screenWidth <= 768) {
+                        // Mobile tablets - 6rem x 3rem
+                        return { width: 6.0, height: 3.0, borderRadius: 1.2 };
+                      } else {
+                        // Desktop - 7.7rem x 3.8rem
+                        return { width: 7.7, height: 3.8, borderRadius: 1.5 };
+                      }
+                    };
 
-                    // Calculate perimeter segments
+                    const { width: buttonWidth, height: buttonHeight, borderRadius: cornerRadius } = getButtonDimensions();
+
+                    // Calculate the outer perimeter path (on the border edge)
                     const straightWidth = buttonWidth - 2 * cornerRadius;
                     const straightHeight = buttonHeight - 2 * cornerRadius;
-                    const cornerArc = (Math.PI / 2) * cornerRadius; // Quarter circle arc length
+                    const cornerArc = (Math.PI / 2) * cornerRadius;
 
                     const totalPerimeter = 2 * straightWidth + 2 * straightHeight + 4 * cornerArc;
 
@@ -153,12 +191,12 @@ export default function AllisonGambleWebsite() {
                     let x, y;
 
                     if (progress < topStraight) {
-                      // Top straight edge
+                      // Top straight edge - position ON the border
                       const t = progress / topStraight;
                       x = (straightWidth / 2) * (t * 2 - 1);
                       y = -buttonHeight / 2;
                     } else if (progress < topRightCorner) {
-                      // Top-right corner
+                      // Top-right corner - follow the outer curve
                       const t = (progress - topStraight) / (topRightCorner - topStraight);
                       const angle = -Math.PI / 2 + (Math.PI / 2) * t;
                       x = (buttonWidth / 2 - cornerRadius) + cornerRadius * Math.cos(angle);
@@ -199,8 +237,8 @@ export default function AllisonGambleWebsite() {
                     }
 
                     return {
-                      left: `calc(50% + ${x * 1.1}rem)`, // Slightly scale down to sit on border
-                      top: `calc(50% + ${y * 1.1}rem)`,
+                      left: `calc(50% + ${x}rem)`, // No scaling - position exactly on border
+                      top: `calc(50% + ${y}rem)`,
                       transform: 'translate(-50%, -50%)'
                     };
                   })()

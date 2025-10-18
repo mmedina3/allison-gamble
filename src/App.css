@@ -180,13 +180,16 @@ button:focus {
   /* Make header more mobile friendly */
   .mobile-header {
     padding: 0.5rem 1rem !important;
-    flex-direction: column !important;
+    flex-direction: row !important;
     gap: 0.5rem !important;
+    justify-content: space-between !important;
+    align-items: center !important;
   }
   
   .mobile-header h1 {
     font-size: 1.8rem !important;
     margin: 0.5rem 0 !important;
+    flex: 1 !important;
   }
   
   .mobile-jackpot {
@@ -194,6 +197,7 @@ button:focus {
     height: 3rem !important;
     margin-right: 0 !important;
     border-width: 0.3rem !important;
+    border-radius: 1.2rem !important;
   }
   
   /* Fix marquee lights for mobile jackpot button */
@@ -210,6 +214,10 @@ button:focus {
     transform: scale(0.6) !important;
   }
   
+  .mobile-header {
+    padding: 0.4rem 0.8rem !important;
+  }
+  
   .mobile-header h1 {
     font-size: 1.5rem !important;
   }
@@ -218,6 +226,7 @@ button:focus {
     width: 5rem !important;
     height: 2.5rem !important;
     border-width: 0.25rem !important;
+    border-radius: 1rem !important;
   }
   
   .mobile-jackpot span {
@@ -241,17 +250,22 @@ button:focus {
   
   .mobile-header {
     padding: 0.25rem 1rem !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
   }
   
   .mobile-header h1 {
     font-size: 1.2rem !important;
     margin: 0.25rem 0 !important;
+    flex: 1 !important;
   }
   
   .mobile-jackpot {
     width: 4rem !important;
     height: 2rem !important;
     border-width: 0.2rem !important;
+    border-radius: 0.8rem !important;
   }
   
   .mobile-jackpot span {
@@ -274,23 +288,34 @@ button:focus {
   
   .mobile-header {
     padding: 0.2rem 0.5rem !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
   }
   
   .mobile-header h1 {
     font-size: 1rem !important;
     margin: 0.1rem 0 !important;
+    flex: 1 !important;
   }
   
   .mobile-jackpot {
     width: 3.5rem !important;
     height: 1.8rem !important;
+    border-radius: 0.6rem !important;
   }
   
   .mobile-jackpot span {
     font-size: 0.7rem !important;
   }
-}/* Mar
-quee lights animation for jackpot button */
+  
+  .mobile-jackpot .marquee-light {
+    width: 0.15rem !important;
+    height: 0.15rem !important;
+  }
+}
+
+/* Marquee lights animation for jackpot button */
 @keyframes marqueePulse {
   0%, 100% { 
     opacity: 0.3;
@@ -301,5 +326,34 @@ quee lights animation for jackpot button */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1.2);
     box-shadow: 0 0 1rem #FFE066, inset 0 0 0.5rem rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* Ensure proper viewport handling on mobile */
+@media screen and (max-width: 768px) {
+  html {
+    /* Prevent zoom on orientation change */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  body {
+    /* Prevent horizontal scrolling */
+    overflow-x: hidden;
+    width: 100vw;
+  }
+  
+  /* Ensure jackpot button stays properly aligned */
+  .mobile-jackpot {
+    flex-shrink: 0;
+    position: relative;
+  }
+  
+  /* Prevent text from wrapping in header */
+  .mobile-header h1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
   }
 }
